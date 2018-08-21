@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class PushMessage {
 
-	private PlatformType platformType;
+	private Platform platform;
 
 	private String token;
 
@@ -13,12 +13,12 @@ public class PushMessage {
 
 	private String templateId;
 
-	public PlatformType getPlatformType() {
-		return platformType;
+	public Platform getPlatform() {
+		return platform;
 	}
 
-	public void setPlatformType(PlatformType platformType) {
-		this.platformType = platformType;
+	public void setPlatform(Platform platform) {	
+		this.platform = platform;
 	}
 
 	public String getToken() {
@@ -45,7 +45,7 @@ public class PushMessage {
 		this.templateId = templateId;
 	}
 
-	static enum PlatformType {
+	public static enum Platform {
 		IOS, WEIXIN, ANDROID, SMS, EMAIL;
 	}
 }
