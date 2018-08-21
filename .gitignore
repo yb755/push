@@ -1,0 +1,9 @@
+/target/
+*/target/
+.settings
+.project
+*/.settings
+*/.project
+*.classpath
+*.log
+*/disconf/
