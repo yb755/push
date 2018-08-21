@@ -26,5 +26,7 @@
   	<module>push-service</module>
   	<module>push-service-weixin</module>
   	<module>push-service-ios</module>
+  	<module>push-test</module>
+  	<module>push-api</module>
   </modules>
 </project>
