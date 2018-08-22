@@ -24,6 +24,10 @@ import com.vbgps.push.weixin.WeiXinPushService;
 @RequestMapping("/api")
 public class PushController extends BaseController {
 
+	// String WX_APP_ID = "wx524efbb9e8c82052";
+	// String templateId = "eUlNy1xrFNZGt0VUZy31Z_jBjQkrZxhjtHFphFrUrxk";
+	// String toUser = "o8KZ30gobWdccLatGN0Pobn4OS4w";
+
 	@ResponseBody
 	@RequestMapping("/push")
 	public ApiResponse<String> push(HttpServletRequest request) {
@@ -62,35 +66,51 @@ public class PushController extends BaseController {
 	private PushRequest getMessage(HttpServletRequest request) {
 		String platform = request.getParameter("platform");
 		if (Platform.WEIXIN.name().equals(platform)) {
-			String WX_APP_ID = "wx524efbb9e8c82052";
-			String templateId = "eUlNy1xrFNZGt0VUZy31Z_jBjQkrZxhjtHFphFrUrxk";
-			String toUser = "o8KZ30gobWdccLatGN0Pobn4OS4w";
-			Enumeration<String> paramKeys = request.getParameterNames();
-			WeiXinMessage wxmsg = new WeiXinMessage();
-			Map<String, String> params = new HashMap<String, String>();
-			while (paramKeys.hasMoreElements()) {
-				String key = paramKeys.nextElement();
-				if ("appId".equals(key)) {
-					wxmsg.setWxAppId(WX_APP_ID);
-				} else if ("url".equals(key)) {
-					wxmsg.setUrl("http://www.baidu.com");
-				} else if ("token".equals(key)) {
-					wxmsg.setOpenId(toUser);
-				} else if ("templateId".equals(key)) {
-					wxmsg.setTemplateId(templateId);
-				} else {
-					params.put(key, request.getParameter(key));
-				}
-			}
-			if (!params.isEmpty()) {
-				wxmsg.setData(params);
-			}
-			return wxmsg;
+			return parseWeiXinMessage(request);
 		} else if (Platform.IOS.name().equals(platform)) {
-			IOSMessage iosmsg = new IOSMessage();
-			return iosmsg;
+			return parseIOSMessage(request);
 		}
 		return null;
+	}
+
+	/**
+	 * 将请求参数转化成微信的消息对象
+	 * @param request
+	 * @return
+	 */
+	private WeiXinMessage parseWeiXinMessage(HttpServletRequest request) {
+		Enumeration<String> paramKeys = request.getParameterNames();
+		WeiXinMessage wxmsg = new WeiXinMessage();
+		Map<String, String> params = new HashMap<String, String>();
+		while (paramKeys.hasMoreElements()) {
+			String key = paramKeys.nextElement();
+			String value = request.getParameter(key);
+			if ("appId".equals(key)) {
+				wxmsg.setWxAppId(value);
+			} else if ("url".equals(key)) {
+				wxmsg.setUrl(value);
+			} else if ("token".equals(key)) {
+				wxmsg.setOpenId(value);
+			} else if ("templateId".equals(key)) {
+				wxmsg.setTemplateId(value);
+			} else {
+				params.put(key, value);
+			}
+		}
+		if (!params.isEmpty()) {
+			wxmsg.setData(params);
+		}
+		return wxmsg;
+	}
+
+	/**
+	 * 将请求转化成IOS的消息对象
+	 * @param request
+	 * @return
+	 */
+	private IOSMessage parseIOSMessage(HttpServletRequest request) {
+		IOSMessage iosmsg = new IOSMessage();
+		return iosmsg;
 	}
 
 	private PushService getPushService(String platform) {
