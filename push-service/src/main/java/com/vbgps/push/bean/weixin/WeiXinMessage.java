@@ -15,7 +15,7 @@ public class WeiXinMessage extends PushRequest {
 	private String url;
 	private String miniProgramAppid;
 	private String miniProgramPagepath;
-	private Map<String, Map<String, String>> data;
+	private Map<String, String> data;
 
 	public String getWxAppId() {
 		return wxAppId;
@@ -65,11 +65,11 @@ public class WeiXinMessage extends PushRequest {
 		this.miniProgramPagepath = miniProgramPagepath;
 	}
 
-	public Map<String, Map<String, String>> getData() {
+	public Map<String, String> getData() {
 		return data;
 	}
 
-	public void setData(Map<String, Map<String, String>> data) {
+	public void setData(Map<String, String> data) {
 		this.data = data;
 	}
 

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%X{sessionId} %date [%thread] %-5level %logger{80} - %msg%n</pattern>
+            <charset>UTF-8</charset> 
+        </encoder>
+    </appender>
+    <logger name="org.springframework">
+        <level value="INFO"/>
+    </logger>
+    <root level="DEBUG">
+        <appender-ref ref="stdout"/>
+    </root>
+</configuration>
+

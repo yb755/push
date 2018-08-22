@@ -9,7 +9,7 @@ public class PushMessage {
 
 	private String token;
 
-	private Map<String, Object> params = new HashMap<String, Object>();
+	private Map<String, String> params = new HashMap<String, String>();
 
 	private String templateId;
 
@@ -29,11 +29,11 @@ public class PushMessage {
 		this.token = token;
 	}
 
-	public Map<String, Object> getParams() {
+	public Map<String, String> getParams() {
 		return params;
 	}
 
-	public void setParams(Map<String, Object> params) {
+	public void setParams(Map<String, String> params) {
 		this.params = params;
 	}
 
