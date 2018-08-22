@@ -28,5 +28,6 @@
   	<module>push-service-ios</module>
   	<module>push-test</module>
   	<module>push-api</module>
+  	<module>push-util</module>
   </modules>
 </project>

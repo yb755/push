@@ -1,8 +1,8 @@
 package com.vbgps.push.bean.ios;
 
-import com.vbgps.push.bean.PushMessage;
+import com.vbgps.push.bean.PushRequest;
 
-public class IOSMessage extends PushMessage {
 
-	
+public class IOSMessage extends PushRequest {
+
 }

@@ -2,15 +2,36 @@ package com.vbgps.push.bean.weixin;
 
 import java.util.Map;
 
-import com.vbgps.push.bean.PushMessage;
+import com.vbgps.push.bean.PushRequest;
 
-public class WeiXinMessage extends PushMessage {
+public class WeiXinMessage extends PushRequest {
+	// 微信的AppId
+	private String wxAppId;
+	// 微信用户的OpenId
+	private String openId;
+	// 微信消息模板ID
 	private String templateId;
 	// URL和miniProgramXXXX不是必需的
 	private String url;
 	private String miniProgramAppid;
 	private String miniProgramPagepath;
 	private Map<String, Map<String, String>> data;
+
+	public String getWxAppId() {
+		return wxAppId;
+	}
+
+	public void setWxAppId(String wxAppId) {
+		this.wxAppId = wxAppId;
+	}
+
+	public String getOpenId() {
+		return openId;
+	}
+
+	public void setOpenId(String openId) {
+		this.openId = openId;
+	}
 
 	public String getTemplateId() {
 		return templateId;

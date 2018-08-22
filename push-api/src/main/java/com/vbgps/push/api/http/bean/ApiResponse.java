@@ -23,7 +23,9 @@ public class ApiResponse<T> {
 	public ApiResponse(ApiResponseCode responseCode, Exception ex) {
 		super();
 		this.code = responseCode.getCode();
-		this.msg = ex.getMessage();
+		if (ex != null) {
+			this.msg = ex.getMessage();
+		}
 	}
 
 	public T getData() {

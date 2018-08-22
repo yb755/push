@@ -6,8 +6,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vbgps.push.api.http.bean.ApiResponse;
 import com.vbgps.push.api.http.bean.ApiResponseCode;
-import com.vbgps.push.bean.PushMessage;
-import com.vbgps.push.bean.PushMessage.Platform;
+import com.vbgps.push.api.http.bean.PushMessage;
+import com.vbgps.push.api.http.bean.PushMessage.Platform;
+import com.vbgps.push.bean.PushRequest;
+import com.vbgps.push.bean.ios.IOSMessage;
+import com.vbgps.push.bean.weixin.WeiXinMessage;
 import com.vbgps.push.ios.IOSPushService;
 import com.vbgps.push.service.PushService;
 import com.vbgps.push.weixin.WeiXinPushService;
@@ -16,6 +19,7 @@ import com.vbgps.push.weixin.WeiXinPushService;
 @RequestMapping("/api")
 public class PushController extends BaseController {
 
+	@ResponseBody
 	@RequestMapping("/push")
 	public ApiResponse<String> push(PushMessage msg) {
 		Platform platform = msg.getPlatform();
@@ -34,7 +38,11 @@ public class PushController extends BaseController {
 		if (pushService == null) {
 			throw new RuntimeException(platform + "暂时还不支持");
 		}
-		pushService.pushMessage(msg);
+		PushRequest obj = getMessage(msg);
+		if (obj == null) {
+			throw new RuntimeException("此消息不支持发送");
+		}
+		pushService.pushMessage(obj);
 		return new ApiResponse<String>(ApiResponseCode.SUCCESS);
 	}
 
@@ -46,7 +54,19 @@ public class PushController extends BaseController {
 		return response;
 	}
 
-	public PushService getPushService(Platform platform) {
+	private PushRequest getMessage(PushMessage msg) {
+		Platform platform = msg.getPlatform();
+		if (platform == Platform.WEIXIN) {
+			WeiXinMessage wxmsg = new WeiXinMessage();
+			return wxmsg;
+		} else if (platform == Platform.IOS) {
+			IOSMessage iosmsg = new IOSMessage();
+			return iosmsg;
+		}
+		return null;
+	}
+
+	private PushService getPushService(Platform platform) {
 		if (platform == Platform.WEIXIN) {
 			return new WeiXinPushService();
 		} else if (platform == Platform.IOS) {

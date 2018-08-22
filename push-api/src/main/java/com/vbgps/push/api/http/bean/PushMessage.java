@@ -1,4 +1,4 @@
-package com.vbgps.push.bean;
+package com.vbgps.push.api.http.bean;
 
 import java.util.HashMap;
 import java.util.Map;
