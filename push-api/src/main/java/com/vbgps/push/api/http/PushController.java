@@ -110,6 +110,24 @@ public class PushController extends BaseController {
 	 */
 	private IOSMessage parseIOSMessage(HttpServletRequest request) {
 		IOSMessage iosmsg = new IOSMessage();
+		Enumeration<String> paramKeys = request.getParameterNames();
+		Map<String, String> params = new HashMap<String, String>();
+		while (paramKeys.hasMoreElements()) {
+			String key = paramKeys.nextElement();
+			String value = request.getParameter(key);
+			if ("appId".equals(key)) {
+				iosmsg.setAppId(value);
+			}else if ("token".equals(key)) {
+				iosmsg.setDeviceToken(value);
+			} else if ("templateId".equals(key)) {
+				iosmsg.setTemplateId(value);
+			} else {
+				params.put(key, value);
+			}
+		}
+		if (!params.isEmpty()) {
+			iosmsg.setData(params);
+		}
 		return iosmsg;
 	}
 

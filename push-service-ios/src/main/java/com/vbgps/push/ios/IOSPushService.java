@@ -29,7 +29,7 @@ public class IOSPushService implements PushService {
 	private static Map<String, IOSCert> CERT_MAP = new HashMap<String, IOSCert>();
 
 	static {
-		CERT_MAP.put("ios_app_001", new IOSCert("/home/ios/cert/pushcert.p12", "123456"));
+		CERT_MAP.put("ios_app_001", new IOSCert("D://bycdaDevelopPush.p12", "123456"));
 	}
 
 	@Override
