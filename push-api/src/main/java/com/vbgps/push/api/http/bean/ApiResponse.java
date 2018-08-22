@@ -1,6 +1,5 @@
 package com.vbgps.push.api.http.bean;
 
-
 public class ApiResponse<T> {
 
 	private Integer code;
@@ -19,6 +18,12 @@ public class ApiResponse<T> {
 		super();
 		this.code = responseCode.getCode();
 		this.msg = responseCode.getMsg();
+	}
+
+	public ApiResponse(ApiResponseCode responseCode, Exception ex) {
+		super();
+		this.code = responseCode.getCode();
+		this.msg = ex.getMessage();
 	}
 
 	public T getData() {
