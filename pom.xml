@@ -7,8 +7,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
-	<name>push-pom</name>
-	<url>http://maven.apache.org</url>
+	<name>yb-push</name>
+	<url>https://github.com/yb755/push</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -36,4 +36,45 @@
 		<module>push-api</module>
 		<module>push-util</module>
 	</modules>
+	<!-- 这里是为了发布到MAVEN中央仓库所做的配置 -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>yebing-ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>yebing-ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
+
+    <description>push sdk</description>
+    <url>https://github.com/yb755/push</url>
+
+    <organization>
+        <name>yebing</name>
+        <url>https://github.com/yb755</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <name>yebing</name>
+            <email>yb755@qq.com</email>
+            <organization>vbgps</organization>
+            <organizationUrl>https://github.com/yb755</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <connection>scm:git:https://github.com/yb755/push.git</connection>
+        <developerConnection>scm:git:https://github.com/yb755/push.git</developerConnection>
+        <url>https://github.com/yb755/push</url>
+    </scm>
+    
+    <licenses>
+    	<license>
+    		<name>GPLv3</name>
+            <url>http://www.gnu.org/licenses/gpl-3.0.txt</url>
+    	</license>
+    </licenses>
 </project>
